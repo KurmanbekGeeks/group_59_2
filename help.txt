@@ -1,0 +1,13 @@
+sudo apt update
+sudo apt install python3-venv
+
+windows
+venv\Scripts\activate
+
+Ubuntu/MacOS
+source venv/bin/activate
+
+rm -r venv 
+python3 -m venv venv
+
+pip install flet[all]
