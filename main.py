@@ -5,14 +5,24 @@ def main_page(page: ft.Page):
     page.title = 'Мое первое приложение'
     greeting_text = ft.Text(value='Hello world')
 
-    name_input = ft.TextField(label='Введите имя')
+    def on_button_click(_):
+        name = name_input.value.strip()
+        # print(name)
 
-    input_button = ft.ElevatedButton(text='send ✅', icon=ft.Icons.SEND_TIME_EXTENSION, color=ft.Colors.PINK_400, icon_color=ft.Colors.GREEN)
+        if name:
+            greeting_text.color = None
+            greeting_text.value = f'Hello {name}'
+            name_input.value = None
+        else:
+            greeting_text.value = 'Вы не ввели имя!'
+            greeting_text.color = ft.Colors.RED
 
-    input_button_text = ft.TextButton(text='send', icon=ft.Icons.SEND_ROUNDED)
+        page.update()
 
-    input_button_icon = ft.IconButton(icon=ft.Icons.SEND, icon_color=ft.Colors.BROWN)
+    name_input = ft.TextField(label='Введите имя', on_submit=on_button_click)
+    input_button_text = ft.TextButton(text='send', icon=ft.Icons.SEND_ROUNDED, on_click=on_button_click)
 
-    page.add(greeting_text, name_input, input_button, input_button_text, input_button_icon)
+
+    page.add(greeting_text, name_input, input_button_text)
 
 ft.app(target=main_page)
